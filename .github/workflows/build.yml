@@ -26,12 +26,15 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.0
       with:
         vs-version: 16.5
+    - name: Add Python3 to PATH
+      run: |
+        echo '::add-path::C:\hostedtoolcache\windows\Python\3.8.2\x64'
     - name: Build Ungoogled Chromium
       run: |
-        python build.py
+        python3 build.py
     - name: Pack Ungoogled Chromium
       run: |
-        python package.py
+        python3 package.py
     - name: Uploading artifacts
       uses: actions/upload-artifact@v2
       with:
