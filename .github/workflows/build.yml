@@ -1,0 +1,33 @@
+name: Ungoogled Chromium builder
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0
+      with:
+        vs-version: [16.4,16.5]
+    - name: Build Ungoogled Chromium
+      run: |
+        python build.py
+    - name: Pack Ungoogled Chromium
+      run: |
+        python package.py
+    - name: Uploading artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: build/ungoogled-chromium_*
