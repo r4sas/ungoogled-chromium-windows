@@ -28,10 +28,10 @@ jobs:
         vs-version: 16.5
     - name: Build Ungoogled Chromium
       run: |
-        python3 build.py
+        python build.py
     - name: Pack Ungoogled Chromium
       run: |
-        python3 package.py
+        python package.py
     - name: Uploading artifacts
       uses: actions/upload-artifact@v2
       with:
